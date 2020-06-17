@@ -1,50 +1,87 @@
 import React from 'react';
+
+// ? Components
 import Header from '../components/Header';
 import Search from '../components/Search';
 import Categories from '../components/Categories';
 import Carousel from '../components/Carousel';
 import CarouselItem from '../components/CarouselItem';
 import Footer from '../components/Footer';
+
+// ? Hooks
+import useInitialState from '../hooks/useInitialState';
+
+// ? Style
 import '../assets/styles/App.scss';
 
-const App = () => (
-  <div className='app'>
-    <Header />
-    <Search />
+const API = 'http://localhost:3000/initalState';
 
-    <Categories title='Categoria 1'>
-      <Carousel>
-        <CarouselItem title='Título descriptivo' detail='2019 16+ 114 minutos' />
-        <CarouselItem title='Título descriptivo' detail='2019 16+ 114 minutos' />
-        <CarouselItem title='Título descriptivo' detail='2019 16+ 114 minutos' />
-        <CarouselItem title='Título descriptivo' detail='2019 16+ 114 minutos' />
-      </Carousel>
-    </Categories>
+const App = () => {
 
-    <Categories title='Categoria 2'>
-      <Carousel>
-        <CarouselItem title='Título descriptivo' detail='2019 16+ 114 minutos' />
-        <CarouselItem title='Título descriptivo' detail='2019 16+ 114 minutos' />
-      </Carousel>
-    </Categories>
+  const initialState = useInitialState(API);
 
-    <Categories title='Categoria 3'>
-      <Carousel>
-        <CarouselItem title='Título descriptivo' detail='2019 16+ 114 minutos' />
-        <CarouselItem title='Título descriptivo' detail='2019 16+ 114 minutos' />
-        <CarouselItem title='Título descriptivo' detail='2019 16+ 114 minutos' />
-        <CarouselItem title='Título descriptivo' detail='2019 16+ 114 minutos' />
-        <CarouselItem title='Título descriptivo' detail='2019 16+ 114 minutos' />
-        <CarouselItem title='Título descriptivo' detail='2019 16+ 114 minutos' />
-        <CarouselItem title='Título descriptivo' detail='2019 16+ 114 minutos' />
-        <CarouselItem title='Título descriptivo' detail='2019 16+ 114 minutos' />
-        <CarouselItem title='Título descriptivo' detail='2019 16+ 114 minutos' />
-        <CarouselItem title='Título descriptivo' detail='2019 16+ 114 minutos' />
-      </Carousel>
-    </Categories>
+  return (
+    <div className='app'>
+      <Header />
+      <Search />
 
-    <Footer />
-  </div>
-);
+      {
+        initialState.mylist?.length > 0 &&
+        (
+          <Categories title='Mi Lista'>
+            <Carousel>
+              {initialState.mylist?.map((item) => (
+                <CarouselItem
+                  key={item.id}
+                  title={item.title}
+                  cover={item.cover}
+                  year={item.year}
+                  contentRating={item.contentRating}
+                  duration={item.duration}
+                />
+              ))}
+            </Carousel>
+          </Categories>
+        )
+      }
+
+      <Categories title='Tendencias'>
+        <Carousel>
+          {
+            initialState.trends?.map((item) => (
+              <CarouselItem
+                key={item.id}
+                title={item.title}
+                cover={item.cover}
+                year={item.year}
+                contentRating={item.contentRating}
+                duration={item.duration}
+              />
+            ))
+          }
+        </Carousel>
+      </Categories>
+
+      <Categories title='Originales'>
+        <Carousel>
+          {
+            initialState.originals?.map((item) => (
+              <CarouselItem
+                key={item.id}
+                title={item.title}
+                cover={item.cover}
+                year={item.year}
+                contentRating={item.contentRating}
+                duration={item.duration}
+              />
+            ))
+          }
+        </Carousel>
+      </Categories>
+
+      <Footer />
+    </div>
+  );
+};
 
 export default App;
