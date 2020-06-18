@@ -12,16 +12,16 @@ import Footer from '../components/Footer';
 import useInitialState from '../hooks/useInitialState';
 
 // ? Style
-import '../assets/styles/App.scss';
+import '../assets/styles/Home.scss';
 
 const API = 'http://localhost:3000/initalState';
 
-const App = () => {
+const Home = () => {
 
   const initialState = useInitialState(API);
 
   return (
-    <div className='app'>
+    <div className='home'>
       <Header />
       <Search />
 
@@ -84,4 +84,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Home;
