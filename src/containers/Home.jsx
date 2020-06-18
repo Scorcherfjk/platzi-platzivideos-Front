@@ -1,18 +1,13 @@
 import React from 'react';
 
 // ? Components
-import Header from '../components/Header';
 import Search from '../components/Search';
 import Categories from '../components/Categories';
 import Carousel from '../components/Carousel';
 import CarouselItem from '../components/CarouselItem';
-import Footer from '../components/Footer';
 
 // ? Hooks
 import useInitialState from '../hooks/useInitialState';
-
-// ? Style
-import '../assets/styles/Home.scss';
 
 const API = 'http://localhost:3000/initalState';
 
@@ -21,8 +16,7 @@ const Home = () => {
   const initialState = useInitialState(API);
 
   return (
-    <div className='home'>
-      <Header />
+    <>
       <Search />
 
       {
@@ -78,9 +72,7 @@ const Home = () => {
           }
         </Carousel>
       </Categories>
-
-      <Footer />
-    </div>
+    </>
   );
 };
 

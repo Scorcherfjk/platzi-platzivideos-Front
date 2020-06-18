@@ -3,8 +3,9 @@
 body {
   margin: 0;
   font-family: $theme-font;
+  background: $first-color;
 }
 
-.register .header {
-  background-color: $second-color;
+.home * {
+  box-sizing: border-box;
 }
