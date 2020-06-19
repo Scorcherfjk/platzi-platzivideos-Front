@@ -16,12 +16,15 @@ const Header = (props) => {
   const { user } = props;
   const hasUser = Object.keys(user).length > 0;
 
+  const { pathname } = window.location;
+  const inHome = RegExp('/$').test(pathname);
+
   const handleLogout = () => {
     props.logoutRequest({});
   };
 
   return (
-    <header className='header'>
+    <header className={inHome ? 'header morado' : 'header verde'}>
       <Link to='/'>
         <img className='header__img' src={logo} alt='Platzi Video' />
       </Link>
