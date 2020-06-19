@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { connect } from 'react-redux';
 
@@ -27,11 +28,8 @@ const Home = ({ mylist, trends, originals }) => {
               {mylist.map((item) => (
                 <CarouselItem
                   key={item.id}
-                  title={item.title}
-                  cover={item.cover}
-                  year={item.year}
-                  contentRating={item.contentRating}
-                  duration={item.duration}
+                  {...item}
+                  isList
                 />
               ))}
             </Carousel>
@@ -45,11 +43,7 @@ const Home = ({ mylist, trends, originals }) => {
             trends.map((item) => (
               <CarouselItem
                 key={item.id}
-                title={item.title}
-                cover={item.cover}
-                year={item.year}
-                contentRating={item.contentRating}
-                duration={item.duration}
+                {...item}
               />
             ))
           }
@@ -62,11 +56,7 @@ const Home = ({ mylist, trends, originals }) => {
             originals.map((item) => (
               <CarouselItem
                 key={item.id}
-                title={item.title}
-                cover={item.cover}
-                year={item.year}
-                contentRating={item.contentRating}
-                duration={item.duration}
+                {...item}
               />
             ))
           }
