@@ -26,9 +26,25 @@ const reducer = (state, action) => {
         ...state,
         user: action.payload,
       };
+    case 'GET_VIDEO_SOURCE':
+      return {
+        ...state,
+        playing: state.trends.find((item) => item.id === Number(action.payload)) ||
+        state.originals.find((item) => item.id === Number(action.payload)) ||
+        [],
+      };
+    case 'SEARCH_VIDEO':
+      return {
+        ...state,
+        search: action.payload.length > 0 ? [
+          ...state.trends.filter((item) => item.title.toLocaleLowerCase().indexOf(action.payload) !== -1),
+          ...state.originals.filter((item) => item.title.toLocaleLowerCase().indexOf(action.payload) !== -1),
+        ] : [],
+      };
     default:
       return state;
   }
+
 };
 
 export default reducer;

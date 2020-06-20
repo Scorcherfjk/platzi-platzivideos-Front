@@ -13,13 +13,28 @@ import CarouselItem from '../components/CarouselItem';
 
 // const API = 'http://localhost:3000/initalState';
 
-const Home = ({ mylist, trends, originals }) => {
+const Home = ({ mylist, trends, originals, search }) => {
 
   // const initialState = useInitialState(API);
 
   return (
     <>
       <Search />
+      {
+        search.length > 0 &&
+        (
+          <Categories title='Resultados de la busqueda'>
+            <Carousel>
+              {search.map((item) => (
+                <CarouselItem
+                  key={item.id}
+                  {...item}
+                />
+              ))}
+            </Carousel>
+          </Categories>
+        )
+      }
       {
         mylist.length > 0 &&
         (
@@ -71,6 +86,7 @@ const mapStateToProps = (state) => {
     mylist: state.mylist,
     trends: state.trends,
     originals: state.originals,
+    search: state.search,
   };
 };
 
